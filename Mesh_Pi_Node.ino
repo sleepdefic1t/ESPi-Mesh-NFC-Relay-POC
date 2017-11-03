@@ -82,12 +82,9 @@ void pollTasks()
 { 
   nfc_button_value = digitalRead(NFC_BUTTON);
   relay_button_value = digitalRead(RELAY_BUTTON);
-  
   unsigned long now = millis();
   if ((now % 1000) == 0) // run every 1-second
   {
-    Serial.print("\n pollTasks = ");
-    Serial.print(now);
     checkNFC();
     checkRelay();
   }
@@ -99,7 +96,6 @@ void pollTasks()
 void checkNFC()
 {
   nfc_button_value = digitalRead(NFC_BUTTON);   // read NFC_MESH_BUTTON 
-  Serial.print("nfc: "); Serial.print(nfc_button_value);
   if (nfc_button_value != 0) { sendNFCRequest(); }
   else {
     digitalWrite(LED_RED, HIGH);
@@ -114,7 +110,6 @@ void checkNFC()
 void checkRelay()
 { 
   relay_button_value = digitalRead(RELAY_BUTTON);   // read RELAY_MESH_BUTTON
-  Serial.print("\n relay: "); Serial.print(relay_button_value);  
   if (relay_button_value != 0) { sendRelayRequest(); }
   else {
     digitalWrite(LED_RED, HIGH);
@@ -151,9 +146,9 @@ void sendRelayRequest()
   mesh.sendBroadcast( msg );
 
   relay_button_value = 0; 
-  pinMode(RELAY_BUTTON, OUTPUT);  // sets the digital pin 4 as input
+  pinMode(RELAY_BUTTON, OUTPUT);
   digitalWrite(RELAY_BUTTON, 0);
-  pinMode(RELAY_BUTTON, INPUT);  // sets the digital pin 4 as input
+  pinMode(RELAY_BUTTON, INPUT);
   digitalWrite(LED_BLUE, LOW);
   delay(500);
   digitalWrite(LED_BLUE, HIGH);
