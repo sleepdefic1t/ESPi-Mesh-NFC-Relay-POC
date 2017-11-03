@@ -4,6 +4,8 @@
     @author   Armin Wieser
     @license  BSD
 
+    @contributor  sleepdeficit | 11/2017
+
     Implemented using NFC forum documents & library of libnfc
 */
 /**************************************************************************/
